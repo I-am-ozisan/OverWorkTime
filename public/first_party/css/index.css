@@ -1,0 +1,55 @@
+.alert {
+  display: none;
+  margin: 0;
+}
+
+thead {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 5.8%;
+  background-color: LightGrey;
+}
+
+.th-holiday_flg_1 {
+  background-color: #CCFFFF;
+}
+
+.th-holiday_flg_2 {
+  background-color: #FFCCFF;
+}
+
+.th-holiday_flg_3 {
+  background-color: #FFCCFF;
+}
+
+.btn {
+  margin-left: 1%;
+}
+
+.header-scroll {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  width: 100%;
+}
+
+.header-scroll .navbar {
+  width: 100%;
+  display: inline-block;
+}
+
+.header-scroll .navbar .container-fluid {
+  display: inline-block;
+  width: 100%;
+}
+
+.header-scroll .navbar .container-fluid .btn-bar {
+  display: inline-block;
+  left: 100px;
+  width: 200px;
+}
+
+.header-scroll .navbar .container-fluid .sum-overwork-time {
+  display: inline-block;
+}
+/*# sourceMappingURL=index.css.map */

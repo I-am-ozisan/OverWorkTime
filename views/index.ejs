@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>労働時間</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="/public/third_party/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/public/first_party/css/index.css">
+    <link href=https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="/public/third_party/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+        
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+
+</head>
+
+<body class="d-flex flex-column h-100">
+    <!-- Begin page content -->
+    <main class="flex-shrink-0">
+        <div class="container">
+            <div class="header-scroll">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <div class="container-fluid">
+                        <a class="navbar-brand">残業時間チェッカー</a>
+                        <div class="btn-bar" id="navbarSupportedContent">
+                            <button class="btn btn-outline-success btn-update">登録</button>
+                            <button class="btn btn-outline-success btn-file">出力</button>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">ガイド</a>
+                        </div>
+                        <div class="sum-overwork-time">
+                            <a class="navbar-brand">総残業時間：</a>
+                            <a class="navbar-brand sum-overwork-time-value">00:00</a>
+                        </div>
+                    </div>
+                </nav>
+                <div class="alert alert-success" role="alert">
+                    更新完了しました。
+                </div>
+                <div class="alert alert-danger" role="alert">
+                    エラーが発生しました。再表示してみてください。
+                </div>
+            </div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">日付</th>
+                        <th scope="col">予定開始時刻</th>
+                        <th scope="col">予定終了時刻</th>
+                        <th scope="col">残業後休憩時間</th>
+                        <th scope="col">実績終了時刻</th>
+                        <th scope="col">残業時間</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for(let i = 0; i < calendar ; i++) { %>
+                        <tr class="result-row th-holiday_flg_<%= workTime[i].holiday_flg %>">
+                            <th scope="row">
+                                <%= workTime[i].calendar_date + workTime[i].week_of_date %>
+                            </th>
+                            <td><input class="input-width estimateStartTime" type="text" maxlength="5" value="<%= workTime[i].estimate_start_time %>" /> </td>
+                            <td><input class="input-width estimateEndTime" type="text" maxlength="5" value="<%=workTime[i].estimate_end_time %>" /></td>
+                            <td><input class="input-width restTime " type="text " maxlength="5" value="<%=workTime[i].rest_time %>" /></td>
+                            <td><input class="input-width expreienceEndTime" type="text" maxlength="5" value="<%=workTime[i].expreience_end_time %>" /></td>
+                            <td><input class="input-width overTime" type="text" readonly="readonly" maxlength="5" value="<%=workTime[i].over_time %>" /></td>
+                        </tr>
+                        <% } %>
+                </tbody>
+            </table>
+        </div>
+        <a class="download" href="<%= csvfilepath %>" download></a>
+    </main>
+    <footer class="footer mt-auto py-3 bg-light">
+        <div class="container">
+        </div>
+    </footer>
+    <script src="/public/first_party/js/index.js"></script>
+</body>
+<!-- モーダルウィンドウ -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">サイトの使い方</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>①月の残業時間を管理するサイトです。</p>
+                <p>②登録ボタンを押すと、データを登録できます。(00:00や9:00といった体裁で入力してください。)</p>
+                <p>③出力ボタンを押すと、データをCSVファイルでダウンロードできます。</p>
+                <p>④予定終了時刻と残業後休憩時間と実績終了時刻を入力すると残業時間が出力されます。</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</html>
