@@ -89,7 +89,7 @@ function getWorkTime(userId) {
                     AND date_trunc('month', T1.calendar_date) = DATE '` + getTodayInfo() + "'" + `
                 WHERE 
                     date_trunc('month', M1.calendar_date) = DATE '` + getTodayInfo() + "'" + `
-                ORDER BY T1.calendar_date ASC`;
+                ORDER BY M1.calendar_date ASC`;
         //SQL実行
         let resultWorkTime = await ConnectInfo(query);
         let outputObj = {
