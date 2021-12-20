@@ -21,7 +21,7 @@ $("input").on("change", function() {
         let estimateEndTime = getClacTime(formatterHalfSize(windowEstimateEndTime));
         //実績終了時刻
         let expreienceEndTime = getClacTime(formatterHalfSize(windowExpreienceEndTime));
-        //定時後旧時刻
+        //定時後休憩時刻
         let restTime = getClacTime(formatterHalfSize(windowRestTime));
         //残業後休憩時刻を組み込んだ残業時刻を抽出。
         let tmpWorkTime = calcTime(expreienceEndTime, estimateEndTime);
@@ -85,7 +85,6 @@ $(".btn-update").on("click", function() {
  */
 $(".btn-file").on("click", function() {
     //メッセージの非表示
-    invisibleMessage();
     reqPostFileDl(getReqDate(), fileUrl);
 });
 
@@ -133,7 +132,7 @@ function reqPostAjax(reqData, url) {
 }
 
 /**
- * リクエスト送信(GET)
+ * リクエスト送信(POST/DL)
  */
 function reqPostFileDl(reqData, url) {
     $.ajax({
@@ -172,7 +171,7 @@ function visibleErrorMessage() {
         "display": "block"
     });
     $("thead").css({
-        "top": "18%"
+        "top": "12%"
     });
 }
 
@@ -212,7 +211,6 @@ function getSumOverTime() {
         let overTime = getClacTime($(element).children("td").children(".overTime").val());
         sum = calcSumTime(overTime, getClacTime(sum));
     });
-    console.log(sum);
     return sum;
 }
 

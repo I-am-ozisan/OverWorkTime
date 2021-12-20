@@ -24,8 +24,7 @@ router.post("/update", async(req, res) => {
     /**
      * メイン処理
      */
-    let userId = await setcookieInfo(req.cookies.key);
-    await registWorkTimeInfo(userId, req.body.arrayReqData);
+    await registWorkTimeInfo(req.cookies.key, req.body.arrayReqData);
     res.send();
 });
 
@@ -50,16 +49,6 @@ function isUndefinedChecked(data) {
     } else {
         return true;
     }
-}
-
-/**
- * 指定月の日数を取得
- * @param {*} year 年
- * @param {*} month 月
- * @returns 　指定した月の末日
- */
-function getLastDate() {
-    return new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate();
 }
 
 /**
@@ -107,7 +96,6 @@ function getWorkTime(userId) {
 function setResData(data, userId) {
 
     let resData = {
-        calendar: getLastDate(),
         workTime: data.workTime,
         csvfilepath: "/tmp/" +
             new Date().getFullYear() +
